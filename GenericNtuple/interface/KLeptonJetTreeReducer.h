@@ -23,12 +23,8 @@ private:
   // Branch items for output tree
   double lepton_pt_, lepton_eta_, lepton_phi_, lepton_iso_;
 
-  doublesP jets_pt_, jets_bTag_;
-  doublesP jetsUp_pt_, jetsUp_bTag_;
-  doublesP jetsDn_pt_, jetsDn_bTag_;
-  doublesP jetsResUp_pt_, jetsResUp_bTag_;
-  doublesP jetsResDn_pt_, jetsResDn_bTag_;
-
+  std::vector<TLorentzVector>* jets_;
+  std::vector<double>* bTags_;
 };
 
 #endif

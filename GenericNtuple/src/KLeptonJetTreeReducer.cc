@@ -13,19 +13,10 @@ KLeptonJetTreeReducer::KLeptonJetTreeReducer(const std::string modeName,
   //outTree_->Branch("lepton_phi", &lepton_phi_, "lepton_phi/D");
   outTree_->Branch("lepton_iso", &lepton_iso_, "lepton_iso/D");
 
-  jets_pt_   = new doubles;
-  jetsUp_pt_ = new doubles;
-  jetsDn_pt_ = new doubles;
-  outTree_->Branch("jets_pt" , &jets_pt_ );
-  outTree_->Branch("jetsUp_pt", &jetsUp_pt_ );
-  outTree_->Branch("jetsDn_pt", &jetsDn_pt_ );
-  if ( isMC_ )
-  {
-    jetsResUp_pt_ = new doubles;
-    jetsResDn_pt_ = new doubles;
-    outTree_->Branch("jetsResUp_pt", &jetsUp_pt_ );
-    outTree_->Branch("jetsResDn_pt", &jetsUp_pt_ );
-  }
+  jets_   = new std::vector<TLorentzVector>;
+  bTags_  = new std::vector<double>();
+  outTree_->Branch("jets" , "std::vector<TLorentzVector>" , &jets_);
+  outTree_->Branch("bTags", &bTags_);
 }
 
 bool KLeptonJetTreeReducer::analyze()
@@ -44,20 +35,21 @@ bool KLeptonJetTreeReducer::analyze()
 
   leptonP4.SetPtEtaPhiM(muon_pt, muon_eta, muon_phi, muon_mass);
 
-/*
+
   for ( int i=0, n=event_->jets_pt_->size(); i<n; ++i )
   {
     const double jetPt = event_->jets_pt_->at(i);
-    jets_pt_->push_back(jetPt);
 
     LorentzVector jetP4;
     jetP4.SetPtEtaPhiM(jetPt, event_->jets_eta_->at(i), event_->jets_phi_->at(i), event_->jets_m_->at(i));
+    jets_->push_back(jetP4);
+    bTags_->push_back(event_->jets_bTag_->at(i));
   }
-  bTagCut_ = 0.898; // Tight cut
-  bTagCut_ = 0.679; // Medium cut
-  bTagCut_ = 0.244; // Loose cut
+//  bTagCut_ = 0.898; // Tight cut
+//  bTagCut_ = 0.679; // Medium cut
+//  bTagCut_ = 0.244; // Loose cut
 
-*/
+
 
   return true;
 }
