@@ -15,7 +15,8 @@ hltMuEl = hltHighLevel.clone(HLTPaths = cms.vstring(
     "HLT_Mu8_Ele17_CaloIdT_CaloIsoVL_TrkIdVL_TrkIsoVL_v*",
 ))
 hltMuJets = hltHighLevel.clone(HLTPaths = cms.vstring(
-    "HLT_IsoMu17_eta2p1_*Central*", "HLT_Mu17_eta2p1_*Central*",
+#    "HLT_IsoMu17_eta2p1_*Central*", "HLT_Mu17_eta2p1_*Central*",
+    "HLT_IsoMu24_eta2p1_v*",
 ))
 hltElJets = hltHighLevel.clone(HLTPaths = cms.vstring(
     "HLT_Ele25_CaloIdVL_*", "HLT_Ele25_CaloIdVT_*", 
